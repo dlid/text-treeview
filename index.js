@@ -39,34 +39,45 @@ function treeItNice(nodes, config) {
     }
 
     nodes.forEach((node, ix) => {
-        
-        var treeIndicator = "",
-            isLast = ix == nodes.length -1
-
-        if (typeof node === "string") {
-            node = {text : node};
-        }
-
-        if (indicatorsEnabled) {
-            treeIndicator = isLast ? CONST_END_NODE : CONST_LEAF_NODE;
-        }
-
-        result += config.format(config.$indents, treeIndicator, node, config.$parent);
-
-        if (node.children) {
-            var c = config.$indents.concat( indicatorsEnabled ? ( isLast ? CONST_EMPTY_SPACE : CONST_NODE ) : []);
-            var nc =  extend({},config, {
-                showRootLines : config.showRootLines,
-                $indents : c,
-                $root : false,
-                $parent : node
-            });
-            result += treeItNice(node.children, nc);
-        }
-
+        result += createNode(node, ix, config, nodes.length, indicatorsEnabled);
     })
-    return result;
 
+    return result;
+}
+
+function createNode(node, ix, config, count, indicatorsEnabled) {
+    
+    var treeIndicator = "",
+        isLast = ix == count -1,
+        result = "";
+
+    if (typeof node === "string") {
+        node = {text : node};
+    }
+
+    if (indicatorsEnabled) {
+        treeIndicator = isLast ? CONST_END_NODE : CONST_LEAF_NODE;
+    }
+
+    result += config.format(config.$indents, treeIndicator, node, config.$parent);
+    result += createChildNodes(node, config, indicatorsEnabled, isLast);
+    
+    return result;
+}
+
+function createChildNodes(node, config, indicatorsEnabled, isLast) {
+    var result = "";
+    if (node.children) {
+        var c = config.$indents.concat( indicatorsEnabled ? ( isLast ? CONST_EMPTY_SPACE : CONST_NODE ) : []);
+        var nc =  extend({},config, {
+            showRootLines : config.showRootLines,
+            $indents : c,
+            $root : false,
+            $parent : node
+        });
+        result += treeItNice(node.children, nc);
+    }
+    return result;
 }
 
 //console.log(colors.yellow("╭─ ") + "All Supers" +colors.yellow("──────────────··"));

@@ -9,34 +9,40 @@
 }
 
 function mergeObjects(rootObject, nextObject) {
-    if (typeof rootObject !== "undefined" && rootObject != null) {
-        if (typeof nextObject !== "undefined") {
-            if (isSimpleType(rootObject) || isSimpleType(nextObject)) {
-                rootObject = nextObject;
-            } else {
-                mergeObjectProperties(rootObject, nextObject);
-            }
-        }
+
+    if (typeof rootObject === "undefined" || rootObject === null) {
+        return rootObject;
     }
+
+    if (typeof nextObject == "undefined") {
+        return rootObject;
+    }
+
+    if (isSimpleType(rootObject) || isSimpleType(nextObject)) {
+        rootObject = nextObject;
+    } else {
+        mergeObjectProperties(rootObject, nextObject);
+    }
+
     return rootObject;
 }
 
+
 function mergeObjectProperties(rootObject, nextObject) {
     var propertyNames = Object.keys(rootObject);
-    for(i=0; i < propertyNames.length; i++) {
-        propertyName = propertyNames[i];
+
+    Object.keys(rootObject).forEach(propertyName => {
         if (typeof nextObject[propertyName] !== "undefined") {
             rootObject[propertyName] = extend(rootObject[propertyName], nextObject[propertyName]);
         }
-    }
+    })
 
-    propertyNames = Object.keys(nextObject);
-    for(i=0; i < propertyNames.length; i++) {
-        propertyName = propertyNames[i];
+
+    Object.keys(nextObject).forEach(propertyName => {
         if (!rootObject[propertyName]) {
             rootObject[propertyName] = nextObject[propertyName];
         }
-    }
+    });
 }
 
 function extend() {
