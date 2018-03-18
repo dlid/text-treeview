@@ -66,23 +66,21 @@ function createNode(node, config, isLast, indicatorsEnabled) {
     }
 
     result += config.format(config.$indents, treeIndicator, node, config.$parent);
-    result += createChildNodes(node, config, indicatorsEnabled, isLast);
+    if (node.children) {
+        result += createChildNodes(node, config, indicatorsEnabled, isLast);
+    }
     
     return result;
 }
 
 function createChildNodes(node, config, indicatorsEnabled, isLast) {
-    var result = "";
-    if (node.children) {
-        var childConfig =  extend({},config, {
-            showRootLines : config.showRootLines,
-            $indents : config.$indents.concat( indicatorsEnabled ? ( isLast ? CONST_EMPTY_SPACE : CONST_NODE ) : []),
-            $root : false,
-            $parent : node
-        });
-        result += treeItNice(node.children, childConfig);
-    }
-    return result;
+    var childConfig =  extend({},config, {
+        showRootLines : config.showRootLines,
+        $indents : config.$indents.concat( indicatorsEnabled ? ( isLast ? CONST_EMPTY_SPACE : CONST_NODE ) : []),
+        $root : false,
+        $parent : node
+    });
+    return treeItNice(node.children, childConfig);
 }
 
 //console.log(colors.yellow("╭─ ") + "All Supers" +colors.yellow("──────────────··"));
