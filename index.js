@@ -39,16 +39,22 @@ function treeItNice(nodes, config) {
     }
 
     nodes.forEach((node, ix) => {
-        result += createNode(node, ix, config, nodes.length, indicatorsEnabled);
-    })
+        result += createNode(node, config, ix == nodes.length -1, indicatorsEnabled);
+    });
 
     return result;
 }
 
-function createNode(node, ix, config, count, indicatorsEnabled) {
-    
+
+/**
+ * Create the string for a single node
+ * @param {object} node The node - an object with a text + child property or a string
+ * @param {object} config The generated configuration object for the node
+ * @param {boolean} isLast If this is the last node of its parent
+ * @param {boolean} indicatorsEnabled If the node indicators are enabled for this node
+ */
+function createNode(node, config, isLast, indicatorsEnabled) {
     var treeIndicator = "",
-        isLast = ix == count -1,
         result = "";
 
     if (typeof node === "string") {
@@ -68,14 +74,13 @@ function createNode(node, ix, config, count, indicatorsEnabled) {
 function createChildNodes(node, config, indicatorsEnabled, isLast) {
     var result = "";
     if (node.children) {
-        var c = config.$indents.concat( indicatorsEnabled ? ( isLast ? CONST_EMPTY_SPACE : CONST_NODE ) : []);
-        var nc =  extend({},config, {
+        var childConfig =  extend({},config, {
             showRootLines : config.showRootLines,
-            $indents : c,
+            $indents : config.$indents.concat( indicatorsEnabled ? ( isLast ? CONST_EMPTY_SPACE : CONST_NODE ) : []),
             $root : false,
             $parent : node
         });
-        result += treeItNice(node.children, nc);
+        result += treeItNice(node.children, childConfig);
     }
     return result;
 }
