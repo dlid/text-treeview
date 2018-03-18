@@ -8,6 +8,18 @@
         || (obj.constructor && obj.constructor.prototype == Array.prototype));
 }
 
+function mergeObjects(rootObject, nextObject) {
+    if (typeof rootObject !== "undefined" && rootObject != null) {
+        if (typeof nextObject !== "undefined") {
+            if (isSimpleType(rootObject) || isSimpleType(nextObject)) {
+                rootObject = nextObject;
+            } else {
+                mergeObjectProperties(rootObject, nextObject);
+            }
+        }
+    }
+    return rootObject;
+}
 
 function mergeObjectProperties(rootObject, nextObject) {
     var propertyNames = Object.keys(rootObject);
@@ -39,15 +51,7 @@ function extend() {
         rootObject = parameters.shift(),
         nextObject = parameters.shift();
 
-    if (typeof rootObject !== "undefined" && rootObject != null) {
-        if (typeof nextObject !== "undefined") {
-            if (isSimpleType(rootObject) || isSimpleType(nextObject)) {
-                rootObject = nextObject;
-            } else {
-                mergeObjectProperties(rootObject, nextObject);
-            }
-        }
-    }
+    rootObject = mergeObjects(rootObject, nextObject);
 
     if (parameters.length > 0) {
         parameters.unshift(rootObject);
