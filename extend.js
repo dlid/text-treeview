@@ -1,73 +1,63 @@
 
-var Extends = (function(){
-    var self = this;
+ function isSimpleType(obj) {
+    return (obj === null ||
+        typeof obj === "string" 
+        || typeof obj === "number"
+        || typeof obj === "boolean"
+        || typeof obj === "function"
+        || (obj.constructor && obj.constructor.prototype == Array.prototype));
+}
 
-    self.keys = function(o) {
-        return Object.keys(o);
+
+function extend() {
+
+    if (arguments.length == 0) {
+        return {};
+    } else if (arguments.length == 1) {
+        return arguments[0];
     }
 
-    self.isSimpleType = function(obj) {
+    var parameters = Array.prototype.slice.call(arguments),
+        rootObject = parameters.shift(),
+        nextObject = parameters.shift() ,
+        i,
+        propertyNames,
+        propertyName;
 
-        return (obj === null ||
-            typeof obj === "string" 
-            || typeof obj === "number"
-            || typeof obj === "boolean"
-            || typeof obj === "function"
-            || (obj.constructor && obj.constructor.prototype == Array.prototype));
+
+    if (typeof rootObject !== "undefined" && rootObject != null) {
     }
 
-    self.extend = function() {
-
-        if (arguments.length == 0) {
-            return {};
-        } else if (arguments.length == 1) {
-            return arguments[0];
-        }
-
-        var parameters = Array.prototype.slice.call(arguments),
-            rootObject = parameters.shift(),
-            nextObject = parameters.shift() ,
-            i,
-            propertyNames,
-            propertyName;
-
-
-        if (typeof rootObject !== "undefined" && rootObject != null) {
-            if (typeof nextObject !== "undefined") {
-                if (self.isSimpleType(rootObject) || self.isSimpleType(nextObject)) {
-                    rootObject = nextObject;
-                } else {
-                    propertyNames = self.keys(rootObject);
-                    for(i=0; i < propertyNames.length; i++) {
-                        propertyName = propertyNames[i];
-                        if (typeof nextObject[propertyName] !== "undefined") {
-                            rootObject[propertyName] = self.extend(rootObject[propertyName], nextObject[propertyName]);
-                        }
+    if (typeof rootObject !== "undefined" && rootObject != null) {
+        if (typeof nextObject !== "undefined") {
+            if (isSimpleType(rootObject) || isSimpleType(nextObject)) {
+                rootObject = nextObject;
+            } else {
+                propertyNames = Object.keys(rootObject);
+                for(i=0; i < propertyNames.length; i++) {
+                    propertyName = propertyNames[i];
+                    if (typeof nextObject[propertyName] !== "undefined") {
+                        rootObject[propertyName] = extend(rootObject[propertyName], nextObject[propertyName]);
                     }
+                }
 
-                    propertyNames = self.keys(nextObject);
-                    for(i=0; i < propertyNames.length; i++) {
-                        propertyName = propertyNames[i];
-                        if (!rootObject[propertyName]) {
-                            rootObject[propertyName] = nextObject[propertyName];
-                        }
+                propertyNames = Object.keys(nextObject);
+                for(i=0; i < propertyNames.length; i++) {
+                    propertyName = propertyNames[i];
+                    if (!rootObject[propertyName]) {
+                        rootObject[propertyName] = nextObject[propertyName];
                     }
                 }
             }
         }
-
-        if (parameters.length > 0) {
-            parameters.unshift(rootObject);
-            return self.extend.apply(self, Array.prototype.slice.call(parameters));
-        }
-
-        return rootObject;
     }
 
-    return {
-        extend : extend
+    if (parameters.length > 0) {
+        parameters.unshift(rootObject);
+        return extend.apply(this, Array.prototype.slice.call(parameters));
     }
 
-}());
+    return rootObject;
+}
 
-module.exports = Extends.extend;
+module.exports = extend;
