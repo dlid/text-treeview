@@ -24,6 +24,7 @@ function parseConfig(config) {
     return newConfig;
 }
 
+
 function format(indents, treeNode, node) {
     return `${indents.join('')}${treeNode}${node.text}\n`;
 }
@@ -83,29 +84,5 @@ function createChildNodes(node, config, indicatorsEnabled, isLast) {
     return treeItNice(node.children, childConfig);
 }
 
-//console.log(colors.yellow("╭─ ") + "All Supers" +colors.yellow("──────────────··"));
-
-// process.stdout.write(treeItNice([
-//     {
-//         text : "Heroes",
-//         children : [
-//             {
-//                 text: "Superman",
-//                 hero : true,
-//                 children : [
-//                     "A.k.a. Clark Kent",
-//                     "A.k.a. Man of Steel"
-//                 ]
-//             },
-//             {text : "Spiderman", hero : true}
-//         ]
-//     }
-// ], {
-//     showRootLines : false
-//     // ,format : function(indent, treeNode, node, parent) {
-//     //     return colors.yellow("│  ") + indent.join('') + treeNode + (node.hero ? colors.yellow('✪ ') + colors.green(node.text) : colors.cyan(node.text)) + (parent ? parent.text : "") + "\n" ;
-//     // }
-// }));
-// //process.stdout.write(colors.yellow("╰───────────────────────────────────────────────────────··"));
 
 module.exports = treeItNice;

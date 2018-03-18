@@ -10,6 +10,8 @@ I iterated the objects and wrote some metadata using `space` for indenting the l
 
 So I wrote a little helper function that could take an array of objects and create a treeview-like experience, making it a lot easer to see the actual structure.
 
+![treeview](https://assets.dlid.se/7747c114/img/text-treeview.png)
+
 Then I decided it was an excellent little function to share with everyone.
 
 ### Installation
