@@ -1,0 +1,35 @@
+{
+  "name": "text-tree",
+  "version": "1.0.0",
+  "description": "Create a tree hierarcy for console output",
+  "main": "index.js",
+  "scripts": {
+    "test": "istanbul cover node_modules/jasmine/bin/jasmine.js -verbose JASMINE_CONFIG_PATH=./jasmine.json",
+    "report-coverage": "codecov"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dlid/text-tree.git"
+  },
+  "keywords": [
+    "node",
+    "node.js",
+    "text",
+    "tree",
+    "treeview"
+  ],
+  "author": "David Lidström",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dlid/text-tree/issues"
+  },
+  "homepage": "https://github.com/dlid/text-tree#readme",
+  "devDependencies": {
+    "chalk": "^2.3.2",
+    "codecov": "^3.0.0",
+    "istanbul": "^0.4.5",
+    "jasmine": "^3.1.0",
+    "jasmine-node": "^1.14.5",
+    "jasmine-reporters": "^2.3.0"
+  }
+}
