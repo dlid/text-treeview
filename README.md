@@ -14,13 +14,13 @@ So I wrote a little helper function that could take an array of objects and crea
 
 Then I decided it was an excellent little function to share with everyone.
 
-### Installation
+# Installation
 
 ```
 npm install text-treeview
 ```
 
-### Basic usage
+# Basic usage
 
 ```
 var tree = require('text-treeview');
@@ -57,7 +57,7 @@ Will give you the result:
    └─ Asgar
 ```
 
-### Tree array
+## Tree array
 
 Each item in the array must be either a string, or an object with a `text` property. You can also use the optional `children` property for an object to add child nodes to the item.
 
@@ -77,7 +77,7 @@ console.log(tree([
 ]));
 ```
 
-### Children
+## Children
 
 Each child item follow the same pattern. A string or the object described above.
 
@@ -106,7 +106,7 @@ will give the result
       └─ Item 3.2
 ```
 
-### Options
+## Options
 
 You pass the options object as the second parameter. These are only a few options and these are the the default ones.
 ```
@@ -120,7 +120,7 @@ You pass the options object as the second parameter. These are only a few option
 - Set `showRootLines` to false to remove the lines on the root level
 - Use `format` to customize each node. See details below.
 
-#### format function
+### format function
 `format (indents, treeNode, node, parentNode)`
 The format function will create each node and will take four parameters
 
