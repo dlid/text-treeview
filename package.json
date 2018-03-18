@@ -1,6 +1,6 @@
 {
   "name": "text-treeview",
-  "version": "0.9.0",
+  "version": "1.0.0",
   "description": "Create a tree hierarcy for console output",
   "main": "index.js",
   "scripts": {
