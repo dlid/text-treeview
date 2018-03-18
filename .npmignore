@@ -1,0 +1,4 @@
+tests
+coverage
+.travis.yml
+jasmine.json

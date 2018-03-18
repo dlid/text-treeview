@@ -1,5 +1,5 @@
 var extend = require('./extend.js');
-var colors = require('chalk');
+//var colors = require('chalk');
 
 const CONST_NODE = "│  ";
 const CONST_END_NODE = "└─ ";
