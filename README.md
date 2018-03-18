@@ -1,8 +1,7 @@
 # text-treeview
 node.js library to write a tree hierarchy for console output.
 
-[![Build Status](https://travis-ci.org/dlid/text-tree.svg?branch=master)](https://travis-ci.org/dlid/text-tree) [![codecov](https://codecov.io/gh/dlid/text-tree/branch/master/graph/badge.svg)](https://codecov.io/gh/dlid/text-tree) [![Maintainability](https://api.codeclimate.com/v1/badges/2bf162d3c7be432bef28/maintainability)](https://codeclimate.com/github/dlid/text-tree/maintainability)
-
+[![Build Status](https://travis-ci.org/dlid/text-treeview.svg?branch=master)](https://travis-ci.org/dlid/text-treeview) [![codecov](https://codecov.io/gh/dlid/text-treeview/branch/master/graph/badge.svg)](https://codecov.io/gh/dlid/text-treeview) [![Maintainability][![Maintainability](https://api.codeclimate.com/v1/badges/7bb4fc43c7b3b6f0aa5f/maintainability)](https://codeclimate.com/github/dlid/text-treeview/maintainability)
 
 # The why
 When writing another library I was working with a deep hierarchy of objects that I had to verify.
