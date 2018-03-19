@@ -125,8 +125,9 @@ You pass the options object as the second parameter. These are only a few option
 The format function will create each node and will take four parameters
 
 - `indents` is an array of each treeview "indent" that will build the treeview.
-   - This array contains all the node indicators that other levels and nodes in the tree has created.  For example `├─ ` or  `└─  `. These should be joined toghether and put in front of the string.
-- `treeNode` is the actual node indicator for the current node (for example  `├─ ` or  `└─  `)
+   - This array contains all the node indicators further up the tree that other levels and nodes in the tree has created.
+   - These are either a NODE `│  ` or EMPTY SPACE `   `. These should be joined toghether and put in front of the string.
+- `treeNode` is the actual node indicator for the current node (this is are either a LEAF_NODE (`├─ `) or  END NODE (`└─  `).
 - `node` is the node object
 - `parentNode` is the parent node of the current node
 
