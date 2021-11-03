@@ -1,11 +1,10 @@
 {
   "name": "text-treeview",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Create a tree hierarcy for console output",
   "main": "index.js",
   "scripts": {
-    "test": "istanbul cover node_modules/jasmine/bin/jasmine.js -verbose JASMINE_CONFIG_PATH=./jasmine.json",
-    "report-coverage": "codecov"
+    "test": "nyc --reporter=lcov ./node_modules/jasmine/bin/jasmine.js  JASMINE_CONFIG_PATH=./jasmine.json"
   },
   "repository": {
     "type": "git",
@@ -26,10 +25,9 @@
   "homepage": "https://github.com/dlid/text-treeview#readme",
   "devDependencies": {
     "chalk": "^2.3.2",
-    "codecov": "^3.0.2",
-    "istanbul": "^0.4.5",
     "jasmine": "^3.1.0",
     "jasmine-node": "^1.14.5",
-    "jasmine-reporters": "^2.3.1"
+    "jasmine-reporters": "^2.3.1",
+    "nyc": "^15.1.0"
   }
 }
